@@ -1,4 +1,4 @@
-module store-service
+module github.com/luissantanaa/online-store/store-service
 
 go 1.21.3
 
