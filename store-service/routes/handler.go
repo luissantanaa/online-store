@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"log"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/luissantanaa/online-store/models"
 	"github.com/luissantanaa/online-store/pkg/db"
@@ -21,4 +23,26 @@ func AddItem(c *fiber.Ctx) error {
 	}
 	db.DB.Db.Create(&item)
 	return c.Status(200).JSON(item)
+}
+
+func PopulateItems(c *fiber.Ctx) error {
+	items := []models.Item{
+		{Name: "Bananas", Quantity: 50},
+		{Name: "Carrots", Quantity: 50},
+		{Name: "Peppers", Quantity: 50},
+		{Name: "Oranges", Quantity: 50},
+		{Name: "Eggs", Quantity: 50},
+		{Name: "Lettuces", Quantity: 50},
+		{Name: "Garlic", Quantity: 50},
+	}
+
+	result := db.DB.Db.Create(items)
+	log.Printf("Result: %v", result)
+	if result.Error != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": result.Error,
+		})
+	}
+
+	return c.Status(200).JSON(items)
 }

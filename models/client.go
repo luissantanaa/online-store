@@ -8,7 +8,7 @@ import (
 
 type Client struct {
 	gorm.Model
-	ID        uint
+	ID        uint64 `sql:"AUTO_INCREMENT" gorm:"primary_key"`
 	Username  string
 	Password  string
 	CreatedAt time.Time

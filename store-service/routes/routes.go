@@ -12,4 +12,6 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/items", GetItems)
 
 	app.Post("/item", AddItem)
+
+	app.Get("/populate", PopulateItems)
 }
