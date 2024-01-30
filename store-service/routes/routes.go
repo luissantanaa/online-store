@@ -14,4 +14,6 @@ func SetupRoutes(app *fiber.App) {
 	app.Post("/item", AddItem)
 
 	app.Get("/populate", PopulateItems)
+
+	app.Delete("/delete", DeleteItem)
 }

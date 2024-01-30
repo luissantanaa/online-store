@@ -25,6 +25,26 @@ func AddItem(c *fiber.Ctx) error {
 	return c.Status(200).JSON(item)
 }
 
+func DeleteItem(c *fiber.Ctx) error {
+	item := new(models.Item)
+	if err := c.BodyParser(item); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": err.Error(),
+		})
+	}
+	res := db.DB.Db.Find(&item, item.ID)
+
+	if res == nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Item not found",
+		})
+	}
+
+	db.DB.Db.Delete(&item)
+
+	return c.Status(200).JSON(item)
+}
+
 func PopulateItems(c *fiber.Ctx) error {
 	items := []models.Item{
 		{Name: "Bananas", Quantity: 50},
