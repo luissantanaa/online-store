@@ -10,8 +10,8 @@ import (
 type Client struct {
 	gorm.Model
 	ID        uint64 `sql:"AUTO_INCREMENT" gorm:"primary_key"`
-	Username  string
-	Password  string
+	Username  string `json:"username" gorm:"not null; default:null; unique;"`
+	Password  string `json:"password" gorm:"not null; default:null"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

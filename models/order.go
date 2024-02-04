@@ -10,11 +10,11 @@ import (
 type Order struct {
 	gorm.Model
 	ID        uint64 `sql:"AUTO_INCREMENT" gorm:"primary_key"`
-	Client    Client `gorm:"foreignKey:ID"`
-	Items     []Item
+	Client    Client `json:"client" gorm:"foreignKey:ID"`
+	Items     []Item `json:"items" gorm:"not null; default:null; unique;"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
-	Sent      bool
+	Sent      bool `json:"sent" gorm:"default:false"`
 }
 
 func (o Order) String() string {
