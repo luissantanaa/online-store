@@ -53,9 +53,6 @@ func TestAddItems(t *testing.T) {
 		},
 	}
 
-	log.Print(strings.NewReader(item.String()))
-	log.Print(item.String())
-
 	// Iterate through test single test cases
 	for _, test := range tests {
 		// Create a new http request with the route from the test case.
