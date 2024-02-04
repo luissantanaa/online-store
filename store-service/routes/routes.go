@@ -5,15 +5,17 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
-	app.Get("/", func(c *fiber.Ctx) error {
+	route := app.Group("/api/v1")
+
+	route.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("boas!")
 	})
 
-	app.Get("/items", GetItems)
+	route.Get("/items", GetItems)
 
-	app.Post("/item", AddItem)
+	route.Post("/item", AddItem)
 
-	app.Get("/populate", PopulateItems)
+	route.Get("/populate", PopulateItems)
 
-	app.Delete("/delete", DeleteItem)
+	route.Delete("/delete", DeleteItem)
 }
