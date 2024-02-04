@@ -17,6 +17,5 @@ type Item struct {
 }
 
 func (i Item) String() string {
-	//return fmt.Sprintf(`{"ID":"%v", "Name":"%v", "Quantity":%v}`, i.Name, i.Quantity)
-	return fmt.Sprintf(`{"Name":"%v"}`, i.Name)
+	return fmt.Sprintf(`{"ID":"%v", "Name":"%v", "Quantity":%v}`, i.ID, i.Name, i.Quantity)
 }
