@@ -21,6 +21,11 @@ func AddItem(c *fiber.Ctx) error {
 			"message": err.Error(),
 		})
 	}
+	if item.Name == "" || item.Quantity == 0 {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Invalid Fields",
+		})
+	}
 	db.DB.Db.Create(&item)
 	return c.Status(200).JSON(item)
 }
