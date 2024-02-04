@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"time"
 
 	"gorm.io/gorm"
@@ -14,4 +15,8 @@ type Order struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Sent      bool
+}
+
+func (o Order) String() string {
+	return fmt.Sprintf(`{"ID":"%v","Client":"%v", "Items":%v, "Sent":%v}`, o.ID, o.Client, o.Items, o.Sent)
 }
