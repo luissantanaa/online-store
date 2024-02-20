@@ -9,7 +9,7 @@ import (
 
 type Client struct {
 	gorm.Model
-	ID        uint64 `sql:"AUTO_INCREMENT" gorm:"primary_key"`
+	ID        uint   `sql:"AUTO_INCREMENT" gorm:"primary_key"`
 	Username  string `json:"username" gorm:"not null; default:null; unique;"`
 	Password  string `json:"password" gorm:"not null; default:null"`
 	CreatedAt time.Time
@@ -17,5 +17,5 @@ type Client struct {
 }
 
 func (c Client) String() string {
-	return fmt.Sprintf(`{"ID":"%v", "Username":"%v"}`, c.ID, c.Username)
+	return fmt.Sprintf(`{"ID":%v, "Username":"%v"}`, c.ID, c.Username)
 }
