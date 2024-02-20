@@ -44,12 +44,28 @@ func TestAddItems(t *testing.T) {
 		expectedCode  int
 	}{
 		{
-			description:   "add item",
+			description:   "add item SUCCESS",
 			route:         "/api/v1/item",
 			method:        "POST",
 			body:          strings.NewReader(item.String()),
 			expectedError: false,
 			expectedCode:  200,
+		},
+		{
+			description:   "add item FAIL - Invalid Body",
+			route:         "/api/v1/item",
+			method:        "POST",
+			body:          strings.NewReader("{\"Name\": \"item\"}"),
+			expectedError: false,
+			expectedCode:  400,
+		},
+		{
+			description:   "add item FAIL - Empty Body",
+			route:         "/api/v1/item",
+			method:        "POST",
+			body:          strings.NewReader("{\"Name\": \"item\"}"),
+			expectedError: false,
+			expectedCode:  400,
 		},
 	}
 
