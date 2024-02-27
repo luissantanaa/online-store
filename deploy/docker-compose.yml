@@ -37,6 +37,7 @@ services:
       - .env
     ports:
       - "8083:8083"
+    command: go run client-service/cmd/client_api.go -b 0.0.0.0
 
   postgres:
     image: postgres:latest

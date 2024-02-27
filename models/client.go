@@ -17,5 +17,5 @@ type Client struct {
 }
 
 func (c Client) String() string {
-	return fmt.Sprintf(`{"ID":%v, "Username":"%v"}`, c.ID, c.Username)
+	return fmt.Sprintf(`{ID:%v, Username:%v}`, c.ID, c.Username)
 }
