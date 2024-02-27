@@ -16,6 +16,7 @@ func GetItems(c *fiber.Ctx) error {
 
 func AddItem(c *fiber.Ctx) error {
 	item := new(models.Item)
+	item_exists := models.Item{Name: item.Name}
 	if err := c.BodyParser(item); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": err.Error(),
@@ -26,6 +27,13 @@ func AddItem(c *fiber.Ctx) error {
 			"message": "Invalid Fields",
 		})
 	}
+
+	if db.DB.Db.Find(&item_exists) != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "Item already exists",
+		})
+	}
+
 	db.DB.Db.Create(&item)
 	return c.Status(200).JSON(item)
 }
