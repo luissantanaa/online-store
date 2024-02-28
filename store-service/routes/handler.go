@@ -28,7 +28,9 @@ func AddItem(c *fiber.Ctx) error {
 		})
 	}
 
-	if db.DB.Db.Find(&item_exists) != nil {
+	db.DB.Db.Find(&item_exists)
+
+	if item_exists.Name == item.Name {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Item already exists",
 		})
