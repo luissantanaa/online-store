@@ -7,6 +7,7 @@ require gorm.io/driver/postgres v1.5.4
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/gofiber/jwt v0.2.0 // indirect
 	github.com/gofiber/utils v0.0.10 // indirect
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/gorilla/schema v1.1.0 // indirect
@@ -24,6 +25,7 @@ require (
 )
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gofiber/fiber v1.14.6
 	github.com/gofiber/fiber/v2 v2.52.0
 	github.com/jackc/pgpassfile v1.0.0 // indirect
