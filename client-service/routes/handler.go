@@ -15,18 +15,19 @@ import (
 
 func Login(c *fiber.Ctx) error {
 	client := new(models.Client)
-	client_exists := models.Client{Username: client.Username}
+	client_exists := models.Client{}
 	if err := c.BodyParser(client); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": err.Error(),
 		})
 	}
 
-	db.DB.Db.Find(&client_exists)
+	db.DB.Db.Table("clients").Find(&client_exists, "username=?", client.Username)
 
 	if client_exists.Username != client.Username {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": "Username does not exist",
+			"user":    client_exists.String(),
 		})
 	}
 
@@ -115,7 +116,7 @@ func DeleteClient(c *fiber.Ctx) error {
 		})
 	}
 
-	db.DB.Db.Delete(&client)
+	db.DB.Db.Unscoped().Delete(&client)
 
 	return c.Status(200).JSON(client.OmitInfo())
 }

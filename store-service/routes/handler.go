@@ -55,7 +55,7 @@ func DeleteItem(c *fiber.Ctx) error {
 		})
 	}
 
-	db.DB.Db.Delete(&item)
+	db.DB.Db.Unscoped().Delete(&item)
 
 	return c.Status(200).JSON(item)
 }
