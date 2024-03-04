@@ -23,7 +23,7 @@ type Client struct {
 }
 
 func (c Client) String() string {
-	return fmt.Sprintf(`{ID:%v, Username:%v}`, c.ID, c.Username)
+	return fmt.Sprintf(`{"Username":"%v", "Password":"%v"}`, c.Username, c.Password)
 }
 
 func (c Client) OmitInfo() AuxClient {

@@ -68,7 +68,7 @@ func GetClients(c *fiber.Ctx) error {
 
 func AddClient(c *fiber.Ctx) error {
 	client := new(models.Client)
-	client_exists := models.Client{Username: client.Username}
+	client_exists := models.Client{}
 	if err := c.BodyParser(client); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": err.Error(),
@@ -80,7 +80,7 @@ func AddClient(c *fiber.Ctx) error {
 		})
 	}
 
-	db.DB.Db.Find(&client_exists)
+	db.DB.Db.Find(&client_exists, "username=?", client.Username)
 
 	if client_exists.Username == client.Username {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
