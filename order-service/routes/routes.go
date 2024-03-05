@@ -18,5 +18,5 @@ func SetupRoutes(app *fiber.App) {
 
 	route.Put("/send", middleware.AuthMiddleware, middleware.AdminMiddleware, SendOrder)
 
-	route.Get("/orders", middleware.AuthMiddleware, middleware.AdminMiddleware, GetOrders)
+	route.Get("/orders", middleware.AuthMiddleware, GetOrders)
 }

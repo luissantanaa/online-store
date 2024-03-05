@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/luissantanaa/online-store/client-service/routes"
+	"github.com/luissantanaa/online-store/order-service/routes"
 	"github.com/luissantanaa/online-store/pkg/db"
 )
 
