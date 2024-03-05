@@ -108,6 +108,13 @@ func DeleteClient(c *fiber.Ctx) error {
 			"message": err.Error(),
 		})
 	}
+
+	if client.ID == 0 {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "No client ID passed",
+		})
+	}
+
 	res := db.DB.Db.Find(&client, client.ID)
 
 	if res == nil {

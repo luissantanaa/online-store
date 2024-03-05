@@ -16,7 +16,7 @@ func GetItems(c *fiber.Ctx) error {
 
 func AddItem(c *fiber.Ctx) error {
 	item := new(models.Item)
-	item_exists := models.Item{Name: item.Name}
+	item_exists := models.Item{}
 	if err := c.BodyParser(item); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": err.Error(),
@@ -28,7 +28,7 @@ func AddItem(c *fiber.Ctx) error {
 		})
 	}
 
-	db.DB.Db.Find(&item_exists)
+	db.DB.Db.Table("items").Find(&item_exists, "name=?", item.Name)
 
 	if item_exists.Name == item.Name {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -47,6 +47,13 @@ func DeleteItem(c *fiber.Ctx) error {
 			"message": err.Error(),
 		})
 	}
+
+	if item.ID == 0 {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"message": "No item ID passed",
+		})
+	}
+
 	res := db.DB.Db.Find(&item, item.ID)
 
 	if res == nil {
