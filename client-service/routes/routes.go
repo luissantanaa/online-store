@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/luissantanaa/online-store/client-service/middleware"
+	"github.com/luissantanaa/online-store/tools/middleware"
 )
 
 func SetupRoutes(app *fiber.App) {
